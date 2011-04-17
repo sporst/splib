@@ -44,6 +44,9 @@ public class JCaret
 	 */
 	private final Color m_caretColor = Color.RED;
 
+	/**
+	 * Listeners that are notified about changes in the caret.
+	 */
 	private final InternalListener m_listener = new InternalListener();
 
 	/**
