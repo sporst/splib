@@ -305,7 +305,13 @@ public class BinaryParser {
 		final int secondByte = readByte() & 0xFF;
 		final int thirdByte = readByte() & 0xFF;
 
-		return new INT24(8 * bytePosition + bitPosition - 24, thirdByte << 16 | secondByte << 8 | firstByte);
+		int value = thirdByte << 16 | secondByte << 8 | firstByte;
+
+		if (value > 0x7FFFFF) {
+			value = value - 0x1000000;
+		}
+
+		return new INT24(8 * bytePosition + bitPosition - 24, value);
 	}
 
 	/**
