@@ -6,6 +6,44 @@ package tv.porst.splib.arrays;
 public final class ArrayHelpers {
 
 	/**
+	 * Returns a sub array of a given array.
+	 * 
+	 * @param source The source array from which the sub array is extracted.
+	 * @param offset The start offset of the sub array.
+	 * @param length The length of the sub array in bytes.
+	 * 
+	 * @return The sub array.
+	 */
+	public static byte[] getSubArray(final byte[] source, final int offset, final int length) {
+
+		if (source == null) {
+			throw new IllegalArgumentException("Source argument must not be null.");
+		}
+
+		if (offset < 0) {
+			throw new IllegalArgumentException("Start offset must not be negative.");
+		}
+
+		if (offset >= source.length) {
+			throw new IllegalArgumentException("Start offset is too big.");
+		}
+
+		if (length < 0) {
+			throw new IllegalArgumentException("Length must not be negative.");
+		}
+
+		if (offset + length > source.length) {
+			throw new IllegalArgumentException("Range is too big.");
+		}
+
+		final byte[] subArray = new byte[length];
+
+		System.arraycopy(source, offset, subArray, 0, length);
+
+		return subArray;
+	}
+
+	/**
 	 * Removes data from a byte array.
 	 * 
 	 * @param data The input byte array.
